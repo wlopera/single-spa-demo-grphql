@@ -1,0 +1,41 @@
+----------------------------------------------------------------------------------------------------
+CREAR SINGLE-SPA
+----------------------------------------------------------------------------------------------------
+> mkdir single-spa-demo
+> cd single-spa-demo
+> mkdir single-spa-demo-root-config
+> cd single-spa-demo-root-config
+> npx create-single-spa
+ee
+? Directory for new project (.) single-spa-demo-nav
+> single-spa application / parcel or single-spa root config
+> react
+>   npm
+? Will this project use Typescript? (y/N) N
+? Organization name (can use letters, numbers, dash or underscore) wlopera
+? Project name (can use letters, numbers, dash or underscore) single-spa-demo-nav
+----------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+D:\WorkSpace\WS_REACT_PRANICAL\single-spa-demo\single-spa-demo-root-config\src\index.ejs
+----------------------------------------------------------------------------------------------------
+agregar react y react-dom 
+  <script type="systemjs-importmap">
+      {
+        "imports": {
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+          ===> "react": "https://unpkg.com/react@17/umd/react.production.min.js",
+          ===> "react-dom": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
+        }
+      }
+    </script>
+
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Realizar ajuste de estilos y utilizar react-router-dom para llamar link sin refrescar la pagina
+en ingle-spa-demo-nav
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
