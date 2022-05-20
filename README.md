@@ -186,3 +186,7 @@ Nodemon
 ![Captura3](https://user-images.githubusercontent.com/7141537/169379357-1c5ecb0e-1b6b-496a-80cb-17b2ca17c9f2.PNG)
 ![Captura4](https://user-images.githubusercontent.com/7141537/169379337-bc09c2a8-ba17-4590-8a26-a6adcb62f9aa.PNG)
 ![Captura5](https://user-images.githubusercontent.com/7141537/169379348-942d2217-d676-48ba-9409-0b10feff34ff.PNG)
+
+## Crear Tabla Génerica Base
+![Captura](https://user-images.githubusercontent.com/7141537/169568424-71f2bcf2-c0f9-4cea-9e94-fd1288c8141f.PNG)
+
