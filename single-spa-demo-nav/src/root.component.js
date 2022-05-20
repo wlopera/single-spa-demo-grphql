@@ -7,10 +7,10 @@ export default function Root() {
     <BrowserRouter>
       <nav className="nav">
         <Link to="/page1" className="link">
-          Página 1
+          Ordenes
         </Link>
         <Link to="/page2" className="link">
-          Página 2
+          Países
         </Link>
       </nav>
     </BrowserRouter>

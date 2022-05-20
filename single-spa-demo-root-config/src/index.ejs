@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Root Config</title>
-
-    <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
-
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';"
-    />
-    <meta name="importmap-type" content="systemjs-importmap" />
-
-    <script type="systemjs-importmap">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Root Config</title>
+  <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';" />
+  <meta name="importmap-type" content="systemjs-importmap" />
+  <script type="systemjs-importmap">
       {
         "imports": {
           "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
@@ -23,64 +18,59 @@
         }
       }
     </script>
-    <link
-      rel="preload"
-      href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
-      as="script"
-    />
-
-    <% if (isLocal) { %>
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script" />
+  <% if (isLocal) { %>
     <script type="systemjs-importmap">
       {
         "imports": {
           "@wlopera/root-config": "//localhost:9000/wlopera-root-config.js",
           "@wlopera/single-spa-demo-nav": "//localhost:9001/wlopera-single-spa-demo-nav.js",
           "@wlopera/single-spa-demo-page-1": "//localhost:9002/wlopera-single-spa-demo-page-1.js",
-          "@wlopera/single-spa-demo-page-2": "//localhost:9003/wlopera-single-spa-demo-page-2.js"
+          "@wlopera/single-spa-demo-page-2": "//localhost:9003/wlopera-single-spa-demo-page-2.js",
+          "@wlopera/single-spa-demo-utility-mod": "//localhost:9005/wlopera-single-spa-demo-utility-mod.js"          
         }
       }
     </script>
     <% } %>
+      <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+      <% if (isLocal) { %>
+        <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+        <% } else { %>
+          <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+          <% } %>
+            <style>
+              body,
+              html {
+                margin: 0;
+                padding: 0;
+                font-size: 16px;
+                font-family: Arial, Helvetica, sans-serif;
+                height: 100%;
+              }
 
-    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
-    <% if (isLocal) { %>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
-    <% } else { %>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
-    <% } %>
-    <style>
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-        font-size: 16px;
-        font-family: Arial, Helvetica, sans-serif;
-        height: 100%;
-      }
-      body {
-        display: flex;
-        flex-direction: column;
-      }
-      * {
-        box-sizing: border-box;
-      }
-    </style>
-  </head>
-  <body>
-    <noscript> Requiere JS para correr este APP </noscript>
-    <div id="nav-container"></div>
-    <main>
-      <div id="page-1-container"></div>
-      <div id="page-2-container"></div>
-    </main>
-    <script>
-      System.import("@wlopera/root-config");
-    </script>
-    <import-map-overrides-full
-      show-when-local-storage="devtools"
-      dev-libs
-    ></import-map-overrides-full>
-  </body>
+              body {
+                display: flex;
+                flex-direction: column;
+              }
+
+              * {
+                box-sizing: border-box;
+              }
+            </style>
+</head>
+<body>
+  <noscript> Requiere JS para correr este APP </noscript>
+  <div id="nav-container"></div>
+  <main>
+    <div id="page-1-container"></div>
+    <div id="page-2-container"></div>
+    <div id="utility-container"></div>
+  </main>
+  <script>
+    System.import("@wlopera/root-config");
+  </script>
+  <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+</body>
 </html>
