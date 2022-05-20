@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ORDERS_QUERY } from "../graphql/Queries";
 import { useQuery } from "@apollo/client";
-import TableBase from "../Table/TableBase";
+// import TableBase from "../Table/TableBase";
+import { test, App, TableBase } from "@wlopera/single-spa-demo-utility-mod";
 
 import classes from "./Orders.module.css";
 
@@ -12,6 +13,7 @@ export default function Orders() {
   const { loading, error, data } = useQuery(ORDERS_QUERY);
 
   useEffect(() => {
+    test("Prueba");
     if (data) {
       const usersData = data.allOrders.map((order) => {
         const { name, street, city, postalCode } = order.user;
@@ -69,11 +71,14 @@ export default function Orders() {
 
   return (
     <div className={classes.container}>
+      <div>
+        <App param=" single-spa-demo-page-1 " />
+      </div>
       <div className={classes.title + " " + classes.tooltip}>
         <span className={classes.tooltiptext}>
           Seleccione un usuario para ver sus pedidos
         </span>
-        <p>Clientes </p>
+        <p>Clientes</p>
       </div>
       <div>
         <table className={classes.order}>

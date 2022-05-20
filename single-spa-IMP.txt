@@ -5,10 +5,13 @@ CREAR SINGLE-SPA
 > cd single-spa-demo
 > mkdir single-spa-demo-root-config
 > cd single-spa-demo-root-config
-> npx create-single-spa
-ee
+> npx create-single-spa simple-spa-demo-utility-mod
+
 ? Directory for new project (.) single-spa-demo-nav
-> single-spa application / parcel or single-spa root config
+> single-spa application / parcel                         ==> Aplicaciones
+  in-browser utility module (styleguide, api cache, etc)  ==> Modulo utilitario
+  single-spa root config                                  ==> Proyecto de configuracion
+
 > react
 >   npm
 ? Will this project use Typescript? (y/N) N
