@@ -190,3 +190,167 @@ Nodemon
 ## Crear Tabla Génerica Base
 ![Captura](https://user-images.githubusercontent.com/7141537/169568424-71f2bcf2-c0f9-4cea-9e94-fd1288c8141f.PNG)
 
+## Agregar un modulo utilitario
+* Un "módulo de utilidad" es un módulo de JavaScript en el navegador que no es una aplicación o paquete de spa único. En otras palabras, su único propósito es exportar la funcionalidad para que la importen otras microfrontends.
+* Los ejemplos comunes de módulos de utilidad incluyen guías de estilo, asistentes de autenticación y asistentes de API. No es necesario registrar estos módulos con spa único, pero son importantes para mantener la coherencia entre varias aplicaciones y parcelas de spa único.
+* Permite en React crear componentes y funciones que se pueden comportir entre los proyectos (Aplicattions)
+* Se puede pasar parámetros
+
+### single-spa-demo-root-config\src\index.ejs
+```diff
+...
+  <script type="systemjs-importmap">
+      {
+        "imports": {
+          "@wlopera/root-config": "//localhost:9000/wlopera-root-config.js",
+          "@wlopera/single-spa-demo-nav": "//localhost:9001/wlopera-single-spa-demo-nav.js",
+          "@wlopera/single-spa-demo-page-1": "//localhost:9002/wlopera-single-spa-demo-page-1.js",
++         "@wlopera/single-spa-demo-page-2": "//localhost:9003/wlopera-single-spa-demo-page-2.js",
++         "@wlopera/single-spa-demo-utility-mod": "//localhost:9005/wlopera-single-spa-demo-utility-mod.js"          
+        }
+      }
+    </script>
+...
+```
+### Modulo Utilitario
+
+#### single-spa-demo-utility-mod\src\wlopera-single-spa-demo-utility-mod.js
+```
+import React from "react";
+import Table from "./Components/Table/Table";
+
+export const App = ({ param }) => {
+  return (
+    <div>
+      <hr />
+      <h3>Módulo utilitario</h3>
+      <p>
+        - Parametro recibido: <strong> {param}</strong>
+      </p>
+      <hr />
+    </div>
+  );
+};
+
+export const test = (param) => {
+  console.log("Ventana de utilitario:", param);
+};
+
+export const TableBase = ({ columns, data, styles }) => {
+  return <Table columns={columns} data={data} styles={styles} />;
+};
+```
+
+![CapturaAA](https://user-images.githubusercontent.com/7141537/169618082-4c6fd596-0683-4b9d-abdb-3e80a5bb5988.PNG)
+
+#### single-spa-demo-page-1\src\components\layout\Orders.js Consumo de Modulo Utilitario (tabla)
+```diff
+import React, { useEffect, useState } from "react";
+import { ORDERS_QUERY } from "../graphql/Queries";
+import { useQuery } from "@apollo/client";
++ // import TableBase from "../Table/TableBase";
++ import { test, App, TableBase } from "@wlopera/single-spa-demo-utility-mod";
+
+...diff 
+...
++     <div>
++        <App param=" single-spa-demo-page-1 " />
++      </div>
+      
+   {orders.length > 0 && (
++              <TableBase
++                columns={columns}
++                data={orders}
++                styles={classes.user}
++              />
+            )}
+...        
+```
+
+#### single-spa-demo-page-2\components\Layout\Countries.js: Consumo de Modulo Utilitario (tabla)
+```
+import React from "react";
+import { TableBase } from "@wlopera/single-spa-demo-utility-mod";
+
+import classes from "./Countries.module.css";
+
+const columns = [
+  {
+    dataField: "id",
+    text: "ID",
+  },
+  {
+    dataField: "country",
+    text: "País",
+  },
+  {
+    dataField: "capital",
+    text: "Capital",
+  },
+  {
+    dataField: "languague",
+    text: "Idioma",
+  },
+  {
+    dataField: "money",
+    text: "Moneda",
+  },
+];
+
+const data = [
+  {
+    id: "m1",
+    country: "Argentina",
+    capital: "Buenos Aires",
+    languague: "Español",
+    money: "Peso Argentino",
+  },
+  {
+    id: "m2",
+    country: "Brasil",
+    capital: "Brasilia",
+    languague: "Portugués",
+    money: "Real brasileño (R$, BRL)",
+  },
+  {
+    id: "m3",
+    country: "Colombia",
+    capital: "Bogota",
+    languague: "Español",
+    money: "Peso Colombiano",
+  },
+  {
+    id: "m4",
+    country: "Panamá",
+    capital: "Ciudad de Panamá",
+    languague: "Español",
+    money: "Balboa o Dolar",
+  },
+  {
+    id: "m4",
+    country: "Venezuela",
+    capital: "Caracas",
+    languague: "Español",
+    money: "Bolívar",
+  },
+];
+
+export default function Countries() {
+  return (
+    <div className={classes.container}>
+      <div className={classes.title}>
+        <p>Países</p>
+      </div>
+
+      <TableBase columns={columns} data={data} styles={classes.countries} />
+    </div>
+  );
+}
+```
+![CapturaA](https://user-images.githubusercontent.com/7141537/169618080-989b703e-0d62-4532-9b07-58783cc89307.PNG)
+![Captura](https://user-images.githubusercontent.com/7141537/169618086-b5886417-c9c7-45f5-bf87-f6e1815bd7dc.PNG)
+* 1.- Componente Utilitario (Se pasa un parámetro)
+* 2.- Componente de la página órdenes
+* 3.- Componente Utilitario (Tabla: Se pasan parámetros de la tabla)
+
+![Captura1](https://user-images.githubusercontent.com/7141537/169618087-859a2c6b-b847-43bb-9d2f-bc846576ddfe.PNG)
