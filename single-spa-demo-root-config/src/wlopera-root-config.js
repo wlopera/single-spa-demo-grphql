@@ -22,13 +22,6 @@ registerApplication(
   { domElement: document.getElementById("page-2-container") }
 );
 
-// registerApplication(
-//   "@wlopera/single-spa-demo-utility-mod",
-//   () => System.import("@wlopera/single-spa-demo-utility-mod"),
-//   isActive.utility,
-//   { domElement: document.getElementById("utility-container") }
-// );
-
 start();
 
 export function prefix(location, ...prefixes) {
@@ -50,8 +43,4 @@ export function page1(location) {
 
 export function page2(location) {
   return prefix(location, "page2");
-}
-
-export function utility(location) {
-  return prefix(location, "utility");
 }
