@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ORDERS_QUERY } from "../graphql/Queries";
 import { useQuery } from "@apollo/client";
+import TableBase from "../Table/TableBase";
 
 import classes from "./Orders.module.css";
 
@@ -47,6 +48,25 @@ export default function Orders() {
 
   // console.log(2222, users, orders);
 
+  const columns = [
+    {
+      dataField: "id",
+      text: "ID",
+    },
+    {
+      dataField: "name",
+      text: "Nombre",
+    },
+    {
+      dataField: "amount",
+      text: "Cantidad",
+    },
+    {
+      dataField: "price",
+      text: "Precio",
+    },
+  ];
+
   return (
     <div className={classes.container}>
       <div className={classes.title + " " + classes.tooltip}>
@@ -55,7 +75,6 @@ export default function Orders() {
         </span>
         <p>Clientes </p>
       </div>
-
       <div>
         <table className={classes.order}>
           <th>ID</th>
@@ -91,23 +110,14 @@ export default function Orders() {
           <div className={classes.title}>
             <p>Ordenes </p>
           </div>
-          <div className={classes.user}>
-            <table>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Cantidad</th>
-              <th>Precio</th>
-              {orders.map(({ id, name, amount, price }) => {
-                return (
-                  <tr key={id}>
-                    <td>{id}</td>
-                    <td>{name}</td>
-                    <td>{amount}</td>
-                    <td>{price}</td>
-                  </tr>
-                );
-              })}
-            </table>
+          <div>
+            {orders.length > 0 && (
+              <TableBase
+                columns={columns}
+                data={orders}
+                styles={classes.user}
+              />
+            )}
           </div>
         </>
       )}
